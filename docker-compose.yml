@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    build:
+      context: db
+    image: ilt-consalting-db:0.0.1-SNAPSHOT
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5435:5432'
+    networks:
+      - ilt-network
+    restart: always
+  ilt-consalting-service:
+    build:
+      context: ilt-consaltin-service
+    image: ilt-consalting-service:0.0.1-SNAPSHOT
+    ports:
+      - '8888:8888'
+    networks:
+      - ilt-network
+    restart: always
+volumes:
+  db_data:
+networks:
+  ilt-network:
+    driver: bridge
