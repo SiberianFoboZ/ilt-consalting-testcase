@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class IltConsaltingService {
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(IltConsaltingService.class, args);
     }
 }

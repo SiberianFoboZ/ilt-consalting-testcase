@@ -1,15 +1,18 @@
 #
 # Build stage
 #
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+FROM maven:3.8.4-eclipse-temurin-17-alpine as build
+WORKDIR /workspace/app
+COPY . .
+RUN mvn package
+RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 #
 # Package stage
 #
-FROM openjdk:11-jre-slim
-COPY --from=build /home/app/target/demo-0.0.1-SNAPSHOT.jar /usr/local/lib/demo.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
+FROM eclipse-temurin:17.0.2_8-jre-alpine
+ARG DEPENDENCY=/workspace/app/target/dependency
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+ENTRYPOINT ["java","-cp","app:app/lib/*","ilt.consalting.testcase.IltConsaltingService"]

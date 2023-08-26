@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-public interface Operation<T, C, U> {
+public interface Operation<T> {
 
     default List<T> findAll() {
         return List.of();
@@ -14,9 +14,9 @@ public interface Operation<T, C, U> {
 
     T findById(@NotNull UUID id);
 
-    T save(@Valid C dto);
+    T save(@Valid T dto);
 
-    T update(@Valid U dto);
+    T update(@Valid T dto);
 
     void delete(@NotNull UUID id);
 }

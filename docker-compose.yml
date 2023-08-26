@@ -8,6 +8,12 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - '5435:5432'
+    environment:
+      POSTGRES_PASSWORD: '!QAZxsw2'
+      PG_DATABASE: ilt
+      PG_USER: developer
+      PG_PASSWORD: '!QAZxsw2'
+      PG_TIMEZONE: 'Asia/Krasnoyarsk'
     networks:
       - ilt-network
     restart: always

@@ -2,13 +2,13 @@ server:
   port: 8888
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5435/ilt
-    username: ilt
-    password: !QAZxsw2
-    driver-class-name: org.postgresql.Driver
+    username: "developer"
+    password: "!QAZxsw2"
+    driver-class-name: "org.postgresql.Driver"
+    url: "jdbc:postgresql://localhost:5435/ilt"
 
   flyway:
-    user: ilt
-    password: !QAZxsw2
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5435/ilt
+    user: "developer"
+    password: "!QAZxsw2"
+    driver-class-name: "org.postgresql.Driver"
+    url: "jdbc:postgresql://localhost:5435/ilt"
